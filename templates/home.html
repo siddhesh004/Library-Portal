@@ -1,0 +1,28 @@
+{% extends "about.html" %}
+
+
+  {% load static %}
+{% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+  <h1 style="color: #ffff00;">S.P.I.T. Library Home</h1>
+  {% if request.user.is_authenticated %}
+    <h2>Welcome to S.P.I.T. Library, {{ request.user.first_name }}! a website developed by <em>Siddhesh Pai</em>.</h2>
+  {% else %}
+    <h2>Welcome to S.P.I.T. Library, the home of books in college.<a href="{% url 'login' %}">PLEASE LOGIN!!</a> </h2>
+   {% endif %}
+    <br>
+    <div class="card">
+    <div class="card-title">The library has the following record counts:</div>
+
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>
+
+
+    </div>
+{% endblock %}

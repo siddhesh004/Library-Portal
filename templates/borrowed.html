@@ -1,0 +1,27 @@
+{% extends "about.html" %}
+
+{% block content %}
+    <h1>Borrowed books</h1>
+
+   <div class="container">
+
+
+<br>
+
+<div class="card">
+<div class="card-title">Books In Your Possesion:</div>
+{% for copy in book_instance_list %}
+<hr>
+    <p><strong>Title:</strong> {{copy.book.title}}</p>
+    <p><strong>Author:</strong> {{copy.book.author}}</p>
+<p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+{% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
+<p><strong>Imprint:</strong> {{copy.imprint}}</p>
+<p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+   {% if copy.status == 'o' %}
+    <a href="{% url 'new_status' copy.id %}" class="btn btn-danger">RETURN BOOK</a>
+    {% endif %}
+{% endfor %}
+</div>
+</div>
+{% endblock %}

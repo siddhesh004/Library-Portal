@@ -1,0 +1,33 @@
+{% extends 'about.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h7><strong> YOU ARE ALREADY LOGGED IN!</strong></h7>
+        {% else %}
+<div class="login-page">
+  <div class="form">
+
+      <form method="post">
+    <div class="card">
+    {% csrf_token %}
+    {% for field in form %}
+        {{ field.label_tag }}
+        {{ field }}<br>
+        {% if field.help_text %}
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+    <button type="submit">Sign up</button>
+    </div>
+
+
+  </form>
+
+  </div>
+</div>
+    {% endif %}
+{% endblock %}
+<h7> YOU ARE ALREADY LOGGED IN!</h7>
+
